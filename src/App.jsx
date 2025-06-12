@@ -1,0 +1,68 @@
+import React, { useState, useEffect } from 'react';
+import CodeGenerator from './components/CodeGenerator';
+import CodeFixer from './components/CodeFixer';
+import CodeExplainer from './components/CodeExplainer';
+import ChatAssistant from './components/ChatAssistant';
+import History from './components/History';
+import ThemeToggle from './components/ThemeToggle';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+
+function App() {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [showHistory, setShowHistory] = useState(false);
+
+  useEffect(() => {
+    document.body.className = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const handleClearAll = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
+  return (
+    <div className={`app-container ${theme}`}>
+      <div className="animated-bg"></div>
+
+      <div className="top-controls">
+        <div className="top-left-buttons">
+          <button className="history-button" onClick={() => setShowHistory(!showHistory)}>History</button>
+          <button className="clear-button" onClick={handleClearAll}>Clear</button>
+        </div>
+
+        <h1 className="app-title">
+          {'@venky code assistance'.split('').map((char, i) => (
+            <span 
+              key={i} 
+              className={`jumping-letter color-${i % 10}`} 
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
+              {char}
+            </span>
+          ))}
+        </h1>
+
+        <div className="top-right-theme">
+          <ThemeToggle theme={theme} setTheme={setTheme} />
+        </div>
+      </div>
+
+      <main className="main-content">
+        <div className="card-section">
+          <CodeGenerator />
+          <CodeFixer />
+          <CodeExplainer />
+          <ChatAssistant />
+          {showHistory && <History />}
+        </div>
+      </main>
+
+      <ToastContainer position="bottom-right" />
+    </div>
+  );
+}
+
+export default App;

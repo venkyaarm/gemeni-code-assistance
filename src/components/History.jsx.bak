@@ -1,0 +1,27 @@
+import React, { useEffect, useState } from 'react';
+
+const History = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('gca-history') || '[]');
+    setItems(data);
+  }, []);
+
+  return (
+    <div>
+      <h2>Prompt History</h2>
+      <ul>
+        {items.map((item, idx) => (
+          <li key={idx} style={{ marginBottom: '1rem' }}>
+            <strong>{item.type}</strong> ({new Date(item.timestamp).toLocaleString()})
+            <div><em>Prompt:</em> {item.input}</div>
+            <div><em>Response:</em> {item.response}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default History;

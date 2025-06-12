@@ -1,0 +1,68 @@
+.history-panel {
+  position: fixed; /* changed from static to fixed */
+  top: 1rem; /* distance from top */
+  left: 1rem; /* distance from left */
+  background: #fff;
+  border: 2px solid #3498db;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 350px;
+  width: 300px; /* fixed width */
+  z-index: 1000; /* above other content */
+  animation: fadeIn 0.5s ease;
+  /* removed margin-top and margin-left */
+}
+
+/* rest stays the same */
+.history-panel h2 {
+  color: #3498db;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.history-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.history-list li {
+  background: #ecf0f1;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.no-history {
+  font-style: italic;
+  color: #888;
+}
+
+.clear-history-btn {
+  margin-top: 1rem;
+  background-color: #e74c3c;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-history-btn:hover {
+  background-color: #c0392b;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,192 @@
+/* Theme setup */
+body.light {
+  color: #222;
+}
+
+body.dark {
+  color: #f1f1f1;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Animated gradient background */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.app-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Top controls layout */
+.top-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+  z-index: 2;
+}
+
+.top-left-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.top-right-theme {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.history-button,
+.clear-button {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.history-button {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.clear-button {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.history-button:hover {
+  background-color: #2980b9;
+}
+
+.clear-button:hover {
+  background-color: #c0392b;
+}
+
+/* Title styling */
+/* Remove old .floating-title animation since it's replaced */
+
+.app-title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 1.5rem auto 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Jumping animation for each letter */
+.jumping-letter {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin: 0 1px;
+  animation: jump 0.6s ease-in-out infinite;
+}
+
+@keyframes jump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Multicolor title characters */
+.color-0 { color: #e74c3c; }
+.color-1 { color: #f39c12; }
+.color-2 { color: #f1c40f; }
+.color-3 { color: #2ecc71; }
+.color-4 { color: #1abc9c; }
+.color-5 { color: #3498db; }
+.color-6 { color: #9b59b6; }
+.color-7 { color: #e67e22; }
+.color-8 { color: #e84393; }
+.color-9 { color: #2c3e50; }
+
+/* Card layout */
+.card-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 1rem;
+  z-index: 2;
+}
+
+.main-content {
+  padding-bottom: 4rem;
+}
+
+/* Inputs and controls */
+input[type="text"],
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #f39c12;
+  outline: none;
+  box-shadow: 0 0 10px #f39c12;
+}
+
+button {
+  background-color: #f39c12;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e67e22;
+}

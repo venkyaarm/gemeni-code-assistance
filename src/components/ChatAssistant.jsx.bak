@@ -1,0 +1,82 @@
+import React, { useState } from 'react';
+import { callGemini } from '../api/gemini';
+import { enhancePrompt } from '../utils/enhancer';
+import { toast } from 'react-toastify';
+
+const ChatAssistant = () => {
+  const [query, setQuery] = useState('');
+  const [response, setResponse] = useState('');
+
+  const handleAsk = async () => {
+    if (!query.trim()) {
+      toast.error('Please enter a question!');
+      return;
+    }
+
+    try {
+      const prompt = enhancePrompt(query);
+      const result = await callGemini(prompt);
+
+      if (result && result.text) {
+        setResponse(result.text);
+        saveToHistory('Chat Assistant', query, result.text);
+        window.dispatchEvent(new Event('historyUpdated')); // Notifies History.jsx
+      } else {
+        toast.error('No response received from Gemini.');
+      }
+    } catch (error) {
+      console.error('Error calling Gemini:', error);
+      toast.error('Something went wrong. Please try again.');
+    }
+  };
+
+  const saveToHistory = (type, input, response) => {
+    const history = JSON.parse(localStorage.getItem('history') || '[]');
+    history.unshift({
+      type,
+      input,
+      response,
+      timestamp: new Date().toISOString(),
+    });
+    localStorage.setItem('history', JSON.stringify(history.slice(0, 50)));
+  };
+
+  return (
+    <div className="chat-assistant">
+      <h2>AI Chat Assistant</h2>
+
+      <textarea
+        rows="3"
+        placeholder="Ask your programming question..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{
+          width: '100%',
+          padding: '10px',
+          fontSize: '16px',
+          marginBottom: '10px',
+        }}
+      />
+
+      <button onClick={handleAsk} style={{ padding: '10px 20px', fontSize: '16px' }}>
+        Ask Gemini
+      </button>
+
+      {response && (
+        <div
+          style={{
+            marginTop: '20px',
+            backgroundColor: '#f8f8f8',
+            padding: '10px',
+            borderRadius: '8px',
+            whiteSpace: 'pre-wrap',
+          }}
+        >
+          {response}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ChatAssistant;

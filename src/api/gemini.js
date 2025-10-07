@@ -1,5 +1,5 @@
 export const callGemini = async (prompt) => {
-  const apiKey = "AIzaSyA_npFVY5JFLru4eyoav9bTb9kqMQquAIU";
+  const apiKey = "AIzaSyDykTtPcnGg-FRH1eXrzidHjH-smrCXehs";
 
   try {
     const response = await fetch(

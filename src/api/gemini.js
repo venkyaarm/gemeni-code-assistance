@@ -1,9 +1,9 @@
 export const callGemini = async (prompt) => {
-  const apiKey = "AIzaSyDykTtPcnGg-FRH1eXrzidHjH-smrCXehs";
+  const apiKey = "AIzaSyCGD2drpPxjmro9ZpOW8veYzcYPASHqXEo";
 
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
@@ -12,9 +12,15 @@ export const callGemini = async (prompt) => {
         body: JSON.stringify({
           contents: [
             {
-              parts: [{ text: prompt }],
+              parts: [
+                { text: prompt }
+              ],
             },
           ],
+          // Optionally, configure thinking for Gemini 2.5 Flash
+          thinkingConfig: {
+            thinkingBudget: 0  // set to 0 to disable “thinking”, or a positive integer to allow reasoning
+          }
         }),
       }
     );
@@ -36,5 +42,3 @@ export const callGemini = async (prompt) => {
     };
   }
 };
-
-
